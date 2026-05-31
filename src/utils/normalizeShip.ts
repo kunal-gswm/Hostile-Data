@@ -138,7 +138,21 @@ export function normalizeShip(raw: RawShip | null | undefined, index: number = 0
   // Optional chaining protects against null/missing at every nesting level
   const specs = raw.technical_specs as Record<string, unknown> | null | undefined;
   const engineData = specs?.engine_data as Record<string, unknown> | null | undefined;
-  const coreType = safeString([engineData?.core_type], "Unknown");
+  
+  const rawEngine = raw.engine as Record<string, unknown> | null | undefined;
+  const rawPropulsion = raw.propulsion as Record<string, unknown> | null | undefined;
+
+  const coreType = safeString(
+    [
+      engineData?.core_type,
+      engineData?.coreType,
+      rawEngine?.core_type,
+      rawEngine?.coreType,
+      rawPropulsion?.core_type,
+      rawPropulsion?.coreType,
+    ],
+    "Unknown",
+  );
 
   // Alert: capacity > 100 AND core type is strictly "plasma" (case-insensitive)
   // Both conditions must be met; null values result in no flag (no false positives)
