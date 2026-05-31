@@ -35,13 +35,13 @@
   --color-primary-hover: #334155;
 
   /* Alert — professional red */
-  --color-alert: #EF4444;
+  --color-alert: #9B1C1C;
   --color-alert-light: #FEF2F2;
   --color-alert-border: #FECACA;
   --color-alert-text: #991B1B;
 
   /* Status colors */
-  --color-status-active: #059669;
+  --color-status-active: #166534;
   --color-status-active-bg: #ECFDF5;
   --color-status-warning: #B45309;
   --color-status-warning-bg: #FFFBEB;
@@ -74,6 +74,10 @@
     box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08);
     border-color: #F87171;
   }
+}
+
+.animate-alert-pulse {
+  will-change: transform, opacity, box-shadow, border-color;
 }
 
 /* ==========================================================================

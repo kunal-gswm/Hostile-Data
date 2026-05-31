@@ -201,8 +201,14 @@ export default function App() {
             value={String(stats.alerts)}
             accent={stats.alerts > 0 ? "alert" : "default"}
           />
-          <StatCard label="Avg. Capacity" value={stats.avgCapacity.toLocaleString()} />
-          <StatCard label="Avg. Price" value={`$${stats.avgPrice.toLocaleString()}`} />
+          <StatCard 
+            label="Avg. Capacity" 
+            value={Intl.NumberFormat('en-US', { notation: "compact", maximumFractionDigits: 1 }).format(stats.avgCapacity)} 
+          />
+          <StatCard 
+            label="Avg. Price" 
+            value={`$${Intl.NumberFormat('en-US', { notation: "compact", maximumFractionDigits: 1 }).format(stats.avgPrice)}`} 
+          />
         </div>
 
         {/* ---- Controls Bar ---- */}
@@ -233,7 +239,7 @@ export default function App() {
             value={coreFilter}
             onChange={(e) => setCoreFilter(e.target.value)}
             aria-label="Filter by core type"
-            className="px-3 py-2.5 bg-surface border border-border rounded-lg text-sm text-heading cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-accent transition-colors"
+            className="w-full sm:w-auto px-3 py-2.5 bg-surface border border-border rounded-lg text-sm text-heading cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-accent transition-colors"
           >
             <option value="all">All Core Types</option>
             {coreTypes.map((ct) => (
@@ -247,7 +253,7 @@ export default function App() {
             value={sort}
             onChange={(e) => setSort(e.target.value as SortField)}
             aria-label="Sort ships"
-            className="px-3 py-2.5 bg-surface border border-border rounded-lg text-sm text-heading cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-accent transition-colors"
+            className="w-full sm:w-auto px-3 py-2.5 bg-surface border border-border rounded-lg text-sm text-heading cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-accent transition-colors"
           >
             <option value="none">Default Order</option>
             <option value="capacity-desc">Capacity: High to Low</option>
@@ -285,11 +291,14 @@ export default function App() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleShips.map((ship) => (
-              <ShipCard key={ship.id} ship={ship} />
-            ))}
-          </div>
+          <section aria-labelledby="fleet-grid-heading">
+            <h2 id="fleet-grid-heading" className="sr-only">Ship List</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {visibleShips.map((ship) => (
+                <ShipCard key={ship.id} ship={ship} />
+              ))}
+            </div>
+          </section>
         )}
       </main>
 

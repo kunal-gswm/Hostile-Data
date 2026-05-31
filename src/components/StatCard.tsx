@@ -18,6 +18,7 @@ export default function StatCard({ label, value, accent = "default" }: StatCardP
     <div className="rounded-xl border border-border bg-surface px-5 py-4">
       <p className="text-[13px] text-muted font-medium mb-1">{label}</p>
       <p
+        title={value}
         className={`text-2xl font-semibold tracking-tight ${
           accent === "alert" ? "text-alert" : "text-heading"
         }`}
