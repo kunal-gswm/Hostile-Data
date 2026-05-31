@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Fleet Inventory — Global Styles
+   ==========================================================================
+   Light, professional theme inspired by Linear / Stripe dashboards.
+   Uses Tailwind CSS v4 @theme for design tokens.
+   ========================================================================== */
+
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Surface colors — clean, neutral palette */
+  --color-page-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F1F5F9;
+  --color-surface-secondary: #F8FAFC;
+
+  /* Borders */
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+
+  /* Text hierarchy */
+  --color-heading: #0F172A;
+  --color-body: #334155;
+  --color-muted: #64748B;
+  --color-faint: #6B7280;
+
+  /* Primary — slate navy */
+  --color-primary: #1E293B;
+  --color-primary-hover: #334155;
+
+  /* Alert — professional red */
+  --color-alert: #EF4444;
+  --color-alert-light: #FEF2F2;
+  --color-alert-border: #FECACA;
+  --color-alert-text: #991B1B;
+
+  /* Status colors */
+  --color-status-active: #059669;
+  --color-status-active-bg: #ECFDF5;
+  --color-status-warning: #B45309;
+  --color-status-warning-bg: #FFFBEB;
+  --color-status-danger: #DC2626;
+  --color-status-danger-bg: #FEF2F2;
+  --color-status-neutral: #64748B;
+  --color-status-neutral-bg: #F8FAFC;
+
+  /* Subtle accent for interactive elements */
+  --color-accent: #3B82F6;
+  --color-accent-light: #EFF6FF;
+
+  /* Custom animation — subtle professional red pulse */
+  --animate-alert-pulse: alert-pulse 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Alert Pulse Keyframes
+   --------------------------------------------------------------------------
+   A subtle, professional pulse — just a soft red border glow that breathes.
+   Intentionally subdued so it reads as "attention needed" rather than "alarm".
+   ========================================================================== */
+
+@keyframes alert-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    border-color: #FECACA;
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08);
+    border-color: #F87171;
+  }
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-page-bg);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Scrollbar — minimal, unobtrusive
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* ==========================================================================
+   Skeleton loading shimmer
+   ========================================================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Reduced Motion — WCAG 2.3.3
+   --------------------------------------------------------------------------
+   Disables all animations for users who prefer reduced motion.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
